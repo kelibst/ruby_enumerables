@@ -6,14 +6,12 @@ module Enumerable
     self
   end
 
-
   def my_each_with_index
     for x in 0...self.length
       yield(self[x], x)
       self
     end
   end
-
 
   def my_select
     ar = []
@@ -24,8 +22,6 @@ module Enumerable
 
     ar
   end
-
-
 
   def my_all?(reg = nil)
     res = true
@@ -41,8 +37,6 @@ module Enumerable
     res
   end
 
-
-
   def my_any?(reg = nil)
     res = false
     self.my_each { |e|
@@ -56,8 +50,6 @@ module Enumerable
     res
     end
 
-
-
   def my_none?(reg = nil)
     res = true
     self.my_each { |e|
@@ -70,8 +62,6 @@ module Enumerable
     }
     res
   end
-
-
 
   def my_count(li = nil)
     counter = 0
@@ -88,8 +78,6 @@ module Enumerable
     end
   end
 
-
-
   def my_map(pr = nil)
     arr = self.class == Range ? to_a : self
     res = []
@@ -97,12 +85,10 @@ module Enumerable
     if pr.nil?
       arr.my_each { |m| res.push(yield(m)) }
     else
-      arr.my_each { |m| res.push(pr.call(e)) }
+      arr.my_each { |m| res.push(pr.call(m)) }
     end
     res
   end
-
-
 
   def my_inject(cum = nil)
     arr = self.class == Range ? to_a : self
@@ -118,8 +104,6 @@ module Enumerable
     end
     cum
   end
-
-
 end
 
 def multiply_els(arr)
