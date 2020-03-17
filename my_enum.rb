@@ -1,24 +1,22 @@
 module Enumerable
   def my_each
-    for x in 0...self.length
+    for x in 0...size # rubocop:disable Style/For
       yield self[x]
     end
     self
   end
 
   def my_each_with_index
-    for x in 0...self.length
+    for x in 0...size # rubocop:disable Style/For
       yield(self[x], x)
-      self
+      self # rubocop:disable Lint/Void
     end
   end
 
   def my_select
     ar = []
 
-    self.my_each { |e|
-      ar.push(e) if yield e
-    }
+    my_each { |e| ar.push(e) if yield e }
 
     ar
   end
@@ -26,66 +24,66 @@ module Enumerable
   def my_all?(reg = nil)
     res = true
 
-    self.my_each { |e|
+    my_each do |e|
       if reg.nil?
         res = false unless yield e
       end
-      if !reg.nil?
+      unless reg.nil?
         res = false unless e =~ reg
       end
-    }
+    end
     res
   end
 
   def my_any?(reg = nil)
     res = false
-    self.my_each { |e|
+    my_each do |e|
       if reg.nil?
-        res = true if (yield e)
-    end
-      if !reg.nil?
+        res = true if yield e
+      end
+      unless reg.nil?
         res = true if e =~ reg
       end
-    }
-    res
     end
-
-  def my_none?(reg = nil)
-    res = true
-    self.my_each { |e|
-      if reg.nil?
-        res = false if yield e
-
-      else
-        res = false if e =~ reg
-      end
-    }
     res
   end
 
-  def my_count(li = nil)
+  def my_none?(reg = nil)
+    res = true
+    my_each do |e|
+      if reg.nil?
+        res = false if yield e
+
+      elsif e =~ reg
+        res = false
+      end
+    end
+    res
+  end
+
+  def my_count(list = nil)
     counter = 0
 
-    if li
-      self.my_each { |i| counter += 1 if li == i }
+    if list
+      my_each { |i| counter += 1 if list == i }
       counter
     elsif block_given?
 
-      self.my_each { |i| counter += 1 if yield(i) }
+      my_each { |i| counter += 1 if yield(i) }
       counter
     else
       size
     end
   end
 
-  def my_map(pr = nil)
+  def my_map(prod = nil)
     arr = self.class == Range ? to_a : self
     res = []
 
-    if pr.nil?
+    if prod.nil?
       arr.my_each { |m| res.push(yield(m)) }
     else
-      arr.my_each { |m| res.push(pr.call(m)) }
+      arr.my_each { |m| res.push(prod.call(m)) }
     end
     res
   end
@@ -99,7 +97,7 @@ module Enumerable
       index = 0
     end
 
-    for x in index...size
+    for x in index...size # rubocop:disable Style/For
       cum = yield(cum, arr[x])
     end
     cum
