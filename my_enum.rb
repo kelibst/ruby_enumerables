@@ -98,10 +98,7 @@ module Enumerable
     end
 
     (index...size).each do |x|
-      if block_given?
-        cum = yield(cum, arr[x])
-      elsif cum.is_a?(Symbol) || reg.is_a?(Symbol)
-      end
+      cum = yield(cum, arr[x]) if block_given?
     end
     return arr.reduce(:+) if reg.nil? && cum.is_a?(Symbol)
     return cum += arr.reduce(:+) if reg.is_a?(Symbol) && cum.is_a?(Integer)
@@ -109,6 +106,7 @@ module Enumerable
     cum
   end
 end
+
 # rubocop:enable Metrics/CyclomaticComplexity:
 # rubocop:enable Metrics/PerceivedComplexity
 # rubocop :enable Style/CaseEquality
