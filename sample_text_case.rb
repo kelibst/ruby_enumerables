@@ -1,17 +1,17 @@
-#  require_relative "my_enum.rb"
+# require_relative "my_enum.rb"
 
 # puts 'my_each'
 
 # [1, 2, 3, 4, 'hi'].my_each do |x|
 #   puts x
 # end
-# puts [2,4,7,11].my_each #<Enumerator: [2, 4, 7, 11]:my_each>
+# puts [2, 4, 7, 11].my_each # <Enumerator: [2, 4, 7, 11]:my_each>
 
 # puts '-*-*-*-*-*-*-*-*-*-*-*-*-'
 # puts 'my_each_with_index'
 
 # [1, 2, 3, 4, 'hi'].my_each_with_index { |value, index| puts "#{value} => #{index}" }
-# puts [2,4,7,11].my_each_with_index  #<Enumerator: [2, 4, 7, 11]:my_each_with_index
+# puts [2, 4, 7, 11].my_each_with_index # <Enumerator: [2, 4, 7, 11]:my_each_with_index
 
 # puts '-*-*-*-*-*-*-*-*-*-*-*-*-'
 # puts 'my_select'
@@ -19,8 +19,8 @@
 # result = [1, 2, 3, 4, 5, 6].select(&:even?) #=> [2, 4, 6]
 # puts result
 # block = proc { |num| num = 11 }
-# puts [2,4,7,11].my_select(&block) #=> [11]
-# puts [2,4,7,11].my_select  #<Enumerator: [2, 4, 7, 11]:my_select>
+# puts [2, 4, 7, 11].my_select(&block) #=> [11]
+# puts [2, 4, 7, 11].my_select # <Enumerator: [2, 4, 7, 11]:my_select>
 # puts [1, 2].my_select { |num| num == 1 } #=> [1]
 
 # puts '-*-*-*-*-*-*-*-*-*-*-*-*-'
@@ -35,7 +35,7 @@
 # puts [nil, false, true, []].my_all? #=> false
 # puts [1, 2.5, 'a', 9].my_all?(Integer) #=> false
 # puts %w[dog door rod blade].my_all?(/d/) #=> true
-# puts [3,4,7,11].my_all?(3) #=> false
+# puts [3, 4, 7, 11].my_all?(3) #=> false
 # puts [1, false].my_all? #=> false
 
 # puts '-*-*-*-*-*-*-*-*-*-*-*-*-'
@@ -50,7 +50,7 @@
 # puts [nil, false, true, []].my_any? #=> true
 # puts [1, 2.5, 'a', 9].my_any?(Integer) #=> true
 # puts %w[dog door rod blade].my_any?(/d/) #=> true
-# puts [3,4,7,11].my_any?(3) #=> true
+# puts [3, 4, 7, 11].my_any?(3) #=> true
 # puts [1, false].my_any? #=> true
 # puts [1].my_any? #=> true
 # puts [nil].my_any? #=> false
@@ -70,7 +70,7 @@
 # puts [nil, false, true, []].my_none? #=> false
 # puts [1, 2.5, 'a', 9].my_none?(Integer) #=> false
 # puts %w[dog door rod blade].my_none?(/d/) #=> false
-# puts [3,4,7,11].my_none?(3) #=> false
+# puts [3, 4, 7, 11].my_none?(3) #=> false
 
 # puts '-*-*-*-*-*-*-*-*-*-*-*-*-'
 # puts 'my_count'
@@ -87,9 +87,9 @@
 # puts (1..4).my_map { 'dog' } #=> ["dog", "dog", "dog", "dog"]
 # puts %w[a b c].my_map(&:upcase) #=> ["A", "B", "C"]
 # puts %w[a b c].my_map(&:class) #=> [String, String, String]
-# puts [2,4,7,11].my_map #<Enumerator: [2, 4, 7, 11]:my_map
-# my_proc = Proc.new {|num| num > 10 }
-# puts [18, 22, 5, 6] .my_map(my_proc) {|num| num < 10 } # true true false false
+# puts [2, 4, 7, 11].my_map # <Enumerator: [2, 4, 7, 11]:my_map
+# my_proc = Proc.new { |num| num > 10 }
+# puts [18, 22, 5, 6] .my_map(my_proc) { |num| num < 10 } # true true false false
 
 # puts '-*-*-*-*-*-*-*-*-*-*-*-*-'
 # puts 'my_inject'

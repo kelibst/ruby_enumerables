@@ -17,7 +17,7 @@ module Enumerable
     end
   end
 
-  def my_select(&block)
+  def my_select
     return to_enum(:my_select) unless block_given?
 
     ar = []
@@ -84,6 +84,8 @@ module Enumerable
     res
   end
 
+  # rubocop:disable Metrics/CyclomaticComplexity:
+  # rubocop:disable Metrics/PerceivedComplexity
   def my_inject(cum = nil, reg = nil)
     arr = self.class == Range ? to_a : self
     if cum.nil?
@@ -96,18 +98,17 @@ module Enumerable
     for x in index...size # rubocop:disable Style/For
       if block_given?
         cum = yield(cum, arr[x])
-      elsif cum.is_a?(Symbol)
-        cum = arr.reduce(:+)
-      elsif reg.is_a?(Symbol)
-        arr_duce = arr.reduce(:+)
+      elsif cum.is_a?(Symbol) || reg.is_a?(Symbol)
       end
     end
-
-    cum = cum += arr_duce if reg.is_a?(Symbol)
+    return arr.reduce(:+) if reg.nil? && cum.is_a?(Symbol)
+    return cum += arr.reduce(:+) if reg.is_a?(Symbol) && cum.is_a?(Integer)
 
     cum
   end
 end
+# rubocop:enable Metrics/CyclomaticComplexity:
+# rubocop:enable Metrics/PerceivedComplexity
 
 def multiply_els(arr)
   arr.my_inject { |acc, val| acc * val }
