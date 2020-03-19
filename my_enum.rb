@@ -1,3 +1,4 @@
+# rubocop :disable Style/CaseEquality
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
@@ -85,6 +86,8 @@ module Enumerable
     res
   end
 
+  # rubocop:disable Metrics/CyclomaticComplexity:
+  # rubocop:disable Metrics/PerceivedComplexity
   def my_inject(cum = nil, reg = nil)
     arr = self.class == Range ? to_a : self
     if cum.nil?
@@ -106,6 +109,9 @@ module Enumerable
     cum
   end
 end
+# rubocop:enable Metrics/CyclomaticComplexity:
+# rubocop:enable Metrics/PerceivedComplexity
+# rubocop :enable Style/CaseEquality
 
 def multiply_els(arr)
   arr.my_inject { |acc, val| acc * val }
