@@ -2,7 +2,7 @@ module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
 
-    for x in 0...size # rubocop:disable Style/For
+    (0...size).each do |x|
       yield self[x]
     end
     self
@@ -11,9 +11,8 @@ module Enumerable
   def my_each_with_index
     return to_enum(:my_each_with_index) unless block_given?
 
-    for x in 0...size # rubocop:disable Style/For
+    (0...size).each do |x|
       yield(self[x], x)
-      self # rubocop:disable Lint/Void
     end
   end
 
@@ -29,7 +28,7 @@ module Enumerable
 
   def my_all?(reg = nil)
     if !reg.nil?
-      my_each { |x| return false unless reg == x }
+      my_each { |x| return false unless reg === x }
     elsif block_given?
       my_each { |x| return false unless yield x }
     else
@@ -38,10 +37,12 @@ module Enumerable
     true
   end
 
+  puts 'my_all?'
+
   def my_any?(reg = nil)
     res = false
     if !reg.nil?
-      my_each { |x| res = true if reg == x }
+      my_each { |x| res = true if reg === x }
     elsif block_given?
       my_each { |x| res = true if yield(x) }
     else
@@ -84,8 +85,6 @@ module Enumerable
     res
   end
 
-  # rubocop:disable Metrics/CyclomaticComplexity:
-  # rubocop:disable Metrics/PerceivedComplexity
   def my_inject(cum = nil, reg = nil)
     arr = self.class == Range ? to_a : self
     if cum.nil?
@@ -95,7 +94,7 @@ module Enumerable
       index = 0
     end
 
-    for x in index...size # rubocop:disable Style/For
+    (index...size).each do |x|
       if block_given?
         cum = yield(cum, arr[x])
       elsif cum.is_a?(Symbol) || reg.is_a?(Symbol)
@@ -107,8 +106,6 @@ module Enumerable
     cum
   end
 end
-# rubocop:enable Metrics/CyclomaticComplexity:
-# rubocop:enable Metrics/PerceivedComplexity
 
 def multiply_els(arr)
   arr.my_inject { |acc, val| acc * val }
