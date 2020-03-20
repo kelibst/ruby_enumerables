@@ -99,7 +99,7 @@ module Enumerable
       cum = yield(cum, arr[x]) if block_given?
     end
     return arr.reduce(cum) if reg.nil? && cum.is_a?(Symbol)
-    return arr.reduce(reg) if reg.is_a?(Symbol) && reg == :*
+    return cum *= arr.reduce(reg) if reg.is_a?(Symbol) && reg == :*
     return cum += arr.reduce(reg) if reg.is_a?(Symbol) && cum.is_a?(Integer)
 
     cum

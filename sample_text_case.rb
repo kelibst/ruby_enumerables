@@ -109,6 +109,9 @@
 
 # p array.my_inject(2, :*) == array.inject(2, :*) #=> true
 
+# array = Range.new(5, 10)
+# p array.my_inject(2, :*) ==  array.inject(2, :*)
+
 # puts '-*-*-*-*-*-*-*-*-*-*-*-*-'
 # puts 'multiply_els'
 
