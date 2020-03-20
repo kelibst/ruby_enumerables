@@ -105,6 +105,9 @@
 # puts (1..5).my_inject(4) { |prod, n| prod * n } #=> 480
 # puts [1, 1, 1].my_inject(:+) #=> 3
 # puts [1, 1, 1].my_inject(2, :+) #=> 5
+# array = (0...10)
+
+# p array.my_inject(2, :*) == array.inject(2, :*) #=> true
 
 # puts '-*-*-*-*-*-*-*-*-*-*-*-*-'
 # puts 'multiply_els'
