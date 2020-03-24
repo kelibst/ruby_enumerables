@@ -15,6 +15,7 @@ module Enumerable
     (0...size).each do |x|
       yield(self[x], x)
     end
+    self
   end
 
   def my_select
